@@ -62,6 +62,8 @@ enum lines_pos
 	LINE_24 =	3840,
 };
 
+// TODO: make refactoring there
+
 void vmem_clean()
 {
   unsigned int i = 0;

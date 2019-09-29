@@ -1,5 +1,5 @@
-#ifndef SCREEN_HEADER
-#define SCREEN_HEADER
+#ifndef VGA_SCREEN_HEADER
+#define VGA_SCREEN_HEADER
 
 void print_line(char *string)
 {
