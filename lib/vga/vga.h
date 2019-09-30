@@ -33,7 +33,7 @@ enum vga_color
 
 int text_output_color = COLOR_WHITE; // default is COLOR_LIGHT_GREY
 
-enum lines_pos
+enum line_pos
 {
 	LINE_0 = 0,
 	LINE_1 = 160,
@@ -72,6 +72,7 @@ void vmem_clean()
     vidptr[i++] = 0x07;
   }
 	last_line = 0;
+	last_pos = 0;
 }
 
 void vmem_print(char *str, enum vga_color col, int pos)
@@ -81,7 +82,7 @@ void vmem_print(char *str, enum vga_color col, int pos)
       vidptr[pos] = str[j];
       vidptr[pos+1] = col;
       ++j;
-      pos = pos + 2;
+      pos = pos + BYTES_FEEL;
   }
 }
 
