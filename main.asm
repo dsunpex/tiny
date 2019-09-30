@@ -11,7 +11,10 @@ section .text
 global start
 global port_write
 global port_read
+global idt_load
+global keyboard_handler
 extern init
+extern keyboard_handler_main
 
 port_read:
     mov edx, [esp + 4]
@@ -23,6 +26,16 @@ port_write:
     mov   al, [esp + 4 + 4]
     out   dx, al
     ret
+
+idt_load:
+    mov edx, [esp + 4]
+    lidt [edx]
+    sti 				;turn on interrupts
+    ret
+
+keyboard_handler:
+    call    keyboard_handler_main
+	  iretd
 
 start:
   	cli
