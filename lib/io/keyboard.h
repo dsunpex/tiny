@@ -1,3 +1,6 @@
+#ifndef IO_KEYBOARD_HEADER
+#define IO_KEYBOARD_HEADER
+
 /*
     Tiny-kernel keyboard module
     needs to be rewritten :p
@@ -34,9 +37,11 @@ unsigned char keyboard_map[128] =
   '9', '0', '-', '=', '\b',	/* Backspace */
   '\t',			/* Tab */
   'q', 'w', 'e', 'r',	/* 19 */
-  't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',	/* Enter key */
+  't', 'y', 'u', 'i',
+	'o', 'p', '[', ']', '\n',	/* Enter key */
     0,			/* 29   - Control */
-  'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
+  'a', 's', 'd', 'f',
+  'g', 'h', 'j', 'k', 'l', ';',	/* 39 */
  '\'', '`',   0,		/* Left shift */
  '\\', 'z', 'x', 'c', 'v', 'b', 'n',			/* 49 */
   'm', ',', '.', '/',   0,				/* Right shift */
@@ -142,13 +147,20 @@ void keyboard_handler_main(void)
 		if(keycode < 0)
 			return;
 
+			//unsigned char prefix = "four";
+
 		if(keycode == ENTER_KEY_CODE) {
-      switch_to_newline();
-      print_here("Tiny prefix >");
-      return;
+      /*switch_to_newline();
+      print_here(prefix);
+			last_pos + last_pos + 8;*/
+
+			screen_print_newline("Enter key has been pressed ");
+			return;
 		}
 
-		vidptr[current_loc++] = keyboard_map[(unsigned char) keycode];
-		vidptr[current_loc++] = 0x07;
+		vidptr[position++] = keyboard_map[(unsigned char) keycode];
+		vidptr[position++] = 0x07;
 	}
 }
+
+#endif

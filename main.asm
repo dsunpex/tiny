@@ -40,6 +40,8 @@ keyboard_handler:
 start:
   	cli
   	mov esp, stack_space
+    ;mov ax,19 ; here select which mode you want
+    ;int 16      ; this calls EGA/VGA/VESA BIOS
   	call init
   	hlt
 
