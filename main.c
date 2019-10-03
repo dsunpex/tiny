@@ -1,36 +1,19 @@
-#include "vmem.h"
+#include "lib/io/io.h"
+//#include "lib/io/serial.h"
+#include "lib/vga/charm.h"
+//#include "lib/vga/screen.h"
+#include "lib/io/keyboard.h"
 
-void vmem_clean(void)
+void init()
 {
-  char *vidptr = (char*)0xb8000;
-  unsigned int i = 0;
-  unsigned int j = 0;
+    screen_clean();
+    screen_print("Hello, world!");
 
-  while(j < 80 * 25 * 2) {
-      vidptr[j] = ' ';
-      vidptr[j+1] = 0x07;
-      j = j + 2;
-  }
-}
+    //serial_init();
+    //serial_write("hello");
 
-void vmem_print(char *str, int i, int j, enum vga_color col)
-{
-  char *vidptr = (char*)0xb8000;
+  	idt_init();
+  	kb_init();
+    while(1);
 
-  while(str[j] != '\0') {
-      vidptr[i] = str[j];
-      vidptr[i+1] = col;
-      ++j;
-      i = i + 2;
-  }
-}
-
-void init(void)
-{
-    vmem_clean();
-
-    vmem_print("something there", 0, 0, COLOR_WHITE);
-    vmem_print("and there :)", 46, 0, COLOR_WHITE);
-
-    return;
 }
